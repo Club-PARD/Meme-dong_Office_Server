@@ -1,20 +1,40 @@
 package com.wepard.meme_dong_office.entity.users;
 
+import com.wepard.meme_dong_office.dto.users.request.UsersRequestDTO;
 import jakarta.persistence.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import static lombok.AccessLevel.PROTECTED;
 
 @Entity
+@Getter
+@NoArgsConstructor(access = PROTECTED)
 public class Users {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 10, nullable = false)
-    private String provider;
-
     @Column(length = 255, nullable = false)
     private String name;
 
     @Column(length = 320, nullable = false)
     private String email;
+
+    @Column(length = 60, nullable = false)
+    private String hashedPassword;
+
+
+    @Builder
+    public Users(
+            final String name,
+            final String email,
+            final String hashedPassword
+    ){
+        this.name = name;
+        this.email = email;
+        this.hashedPassword = hashedPassword;
+    }
 }

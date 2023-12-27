@@ -33,7 +33,7 @@ public class TokenProvider {
     }
 
     public String createToken(Long id, int tokenValidityHours){
-        Date exprTime = localDateTimeToDate(LocalDateTime.from(Instant.now().plus(tokenValidityHours, ChronoUnit.HOURS)));
+        Date exprTime = localDateTimeToDate(LocalDateTime.now().plusHours(tokenValidityHours));
         Date nowTime = localDateTimeToDate(LocalDateTime.now());
         String userId = id.toString();
         return Jwts.builder()

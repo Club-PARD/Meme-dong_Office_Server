@@ -3,6 +3,9 @@ package com.wepard.meme_dong_office.repository;
 import com.wepard.meme_dong_office.entity.users.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.Optional;
+
 public interface UsersRepository extends JpaRepository<Users, Long> {
-    Users findByEmailAndProvider(String email, String provider);
+    Optional<Users> findByEmail(String email);
+    boolean existsByEmail(String email);
 }

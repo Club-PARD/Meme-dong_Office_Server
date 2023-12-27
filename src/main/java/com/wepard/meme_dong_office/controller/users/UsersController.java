@@ -10,15 +10,21 @@ public class UsersController {
 
     @GetMapping("/users/{userId}")
     public ResponseEntity<?> getUsers(@PathVariable Long userId){
-        UsersResponseDTO user = new UsersResponseDTO();
-        user.setId(1L);
+        UsersResponseDTO user = UsersResponseDTO.builder()
+                .id(1L)
+                .name("name")
+                .email("email@email.com")
+                .build();
         return ResponseEntity.ok().body(user);
     }
 
     @PatchMapping("/users/{userId}")
     public ResponseEntity<?> updateUsers(@PathVariable Long userId){
-        UsersResponseDTO user = new UsersResponseDTO();
-        user.setId(1L);
+        UsersResponseDTO user = UsersResponseDTO.builder()
+                .id(1L)
+                .name("name")
+                .email("email@email.com")
+                .build();
         return ResponseEntity.ok().body(user);
     }
 
