@@ -1,7 +1,6 @@
 package com.wepard.meme_dong_office.controller.users.categories;
 
-import com.wepard.meme_dong_office.DTO.categories.response.CategoriesResponseDTO;
-import com.wepard.meme_dong_office.DTO.usersCategories.response.UsersCategoriesResponseDTO;
+import com.wepard.meme_dong_office.dto.usersCategories.response.UsersCategoriesResponseDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

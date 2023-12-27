@@ -1,8 +1,8 @@
 package com.wepard.meme_dong_office.controller.cards;
 
-import com.wepard.meme_dong_office.DTO.cards.request.CardsRequestDTO;
-import com.wepard.meme_dong_office.DTO.cards.response.CardsResponseDTO;
-import com.wepard.meme_dong_office.DTO.categories.response.CategoriesResponseDTO;
+import com.wepard.meme_dong_office.dto.cards.request.CardsRequestDTO;
+import com.wepard.meme_dong_office.dto.cards.response.CardsResponseDTO;
+import com.wepard.meme_dong_office.dto.categories.response.CategoriesResponseDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
