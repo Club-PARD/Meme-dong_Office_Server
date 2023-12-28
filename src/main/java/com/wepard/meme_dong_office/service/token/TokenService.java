@@ -24,9 +24,9 @@ public class TokenService {
 
     @Autowired
     public TokenService(
-            UsersRepository usersRepository,
-            TokenProvider tokenProvider,
-            WebSecurityConfig webSecurityConfig
+            final UsersRepository usersRepository,
+            final TokenProvider tokenProvider,
+            final WebSecurityConfig webSecurityConfig
     ){
         this.usersRepository = usersRepository;
         this.tokenProvider = tokenProvider;

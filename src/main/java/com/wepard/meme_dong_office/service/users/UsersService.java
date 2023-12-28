@@ -1,6 +1,7 @@
 package com.wepard.meme_dong_office.service.users;
 
 import com.wepard.meme_dong_office.config.WebSecurityConfig;
+import com.wepard.meme_dong_office.dto.students.list.response.StudentsListResponseDTO;
 import com.wepard.meme_dong_office.dto.token.response.TokenResponseDTO;
 import com.wepard.meme_dong_office.dto.users.request.UsersRequestDTO;
 import com.wepard.meme_dong_office.dto.users.response.UsersResponseDTO;
@@ -12,6 +13,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.stream.Collectors;
+
 @Service
 @Slf4j
 public class UsersService {
@@ -21,8 +24,8 @@ public class UsersService {
 
     @Autowired
     public UsersService(
-            UsersRepository usersRepository,
-            WebSecurityConfig webSecurityConfig
+            final UsersRepository usersRepository,
+            final WebSecurityConfig webSecurityConfig
     ){
         this.usersRepository = usersRepository;
         this.webSecurityConfig = webSecurityConfig;
@@ -69,5 +72,30 @@ public class UsersService {
         }
 
         return savedUsers.getId();
+    }
+
+    public UsersResponseDTO getUsers(
+            Long userId
+    ){
+        final Users users;
+        try{
+            users = usersRepository.findById(userId).get();
+        } catch (Exception ex){
+            log.error("UsersService.getUsers message:{}",ex.getMessage(),ex);
+            throw new CustomException(ExceptionCode.FAILED_TO_FIND_USER);
+        }
+
+        return UsersResponseDTO
+                .builder()
+                .id(users.getId())
+                .email(users.getEmail())
+                .name(users.getName())
+                .studentsList(
+                        users.getStudentsLists()
+                                .stream()
+                                .map(StudentsListResponseDTO::new)
+                                .collect(Collectors.toList())
+                )
+                .build();
     }
 }
