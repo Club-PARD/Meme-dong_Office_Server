@@ -55,4 +55,25 @@ public class StudentsImagesController {
 
         return ResponseEntity.created(location).build();
     }
+
+    @DeleteMapping("/students/{id}/images")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "204",
+                    description = "이미지 삭제 성공"
+            )
+    })
+    public ResponseEntity<?> deleteStudentsImages(
+            @PathVariable final Long id,
+            @RequestHeader(value = "Authorization") final String token
+    ){
+
+        final Long userId = Long.parseLong(
+                tokenProvider.validate(token.substring(7))
+        );
+
+        studentsImagesService.deleteStudentsImages(id, userId);
+
+        return ResponseEntity.noContent().build();
+    }
 }
