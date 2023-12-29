@@ -65,4 +65,10 @@ public class Students {
         this.studyLevel = studyLevel;
         this.etc = etc;
     }
+
+    public void updateImageURL(
+            final String imageURL
+    ){
+        this.imageURL = imageURL;
+    }
 }

@@ -17,6 +17,7 @@ public enum ExceptionCode {
 
     //500~
     FAILED_TO_DELETE_DATA(HttpStatus.INTERNAL_SERVER_ERROR, "Failed to delete data."),
+    FAILED_TO_FIND_STUDENTS(HttpStatus.INTERNAL_SERVER_ERROR, "Failed to find students."),
     FAILED_TO_FIND_STUDENTS_LIST(HttpStatus.INTERNAL_SERVER_ERROR, "Failed to find students list."),
     FAILED_TO_FIND_USER(HttpStatus.INTERNAL_SERVER_ERROR, "Failed to find user."),
     FAILED_TO_CREATE_STUDENTS_LIST(HttpStatus.INTERNAL_SERVER_ERROR, "Failed to create students list."),

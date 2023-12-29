@@ -32,18 +32,12 @@ public class UsersService {
         this.webSecurityConfig = webSecurityConfig;
     }
 
-    /**
-     *
-     * @param usersRequestDTO
-     * @return userId
-     */
     public Long signUp(final UsersRequestDTO usersRequestDTO){
 
         final String email = usersRequestDTO.getEmail();
         final String hashedPassword = webSecurityConfig
                 .getPasswordEncoder()
                 .encode(usersRequestDTO.getPassword());
-        usersRequestDTO.updatePassword(hashedPassword);
 
         boolean isEmailExist;
         try{
@@ -61,7 +55,7 @@ public class UsersService {
         final Users putUsers = Users.builder()
                 .name(usersRequestDTO.getName())
                 .email(usersRequestDTO.getEmail())
-                .hashedPassword(usersRequestDTO.getPassword())
+                .hashedPassword(hashedPassword)
                 .build();
         final Users savedUsers;
 
