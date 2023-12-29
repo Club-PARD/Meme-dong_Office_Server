@@ -1,6 +1,7 @@
 package com.wepard.meme_dong_office.service.students.list;
 
 import com.wepard.meme_dong_office.dto.students.list.request.StudentsListRequestDTO;
+import com.wepard.meme_dong_office.dto.students.list.request.StudentsListUpdateRequestDTO;
 import com.wepard.meme_dong_office.dto.students.list.response.StudentsListResponseDTO;
 import com.wepard.meme_dong_office.dto.students.request.StudentsRequestDTO;
 import com.wepard.meme_dong_office.dto.students.response.StudentsResponseDTO;
@@ -12,12 +13,15 @@ import com.wepard.meme_dong_office.exception.constants.ExceptionCode;
 import com.wepard.meme_dong_office.repository.StudentsListRepository;
 import com.wepard.meme_dong_office.repository.StudentsRepository;
 import com.wepard.meme_dong_office.repository.UsersRepository;
+import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @Service
@@ -99,8 +103,10 @@ public class StudentsListService {
             final Long userId
     ){
         final StudentsList studentsList;
-        try{
+        try {
             studentsList = studentsListRepository.findById(studentsListId).get();
+        } catch (NoSuchElementException ex){
+            throw new CustomException(ExceptionCode.DATA_NOT_EXIST);
         } catch (Exception ex){
             log.error("StudentsListService.getStudentsList message:{}",ex.getMessage(),ex);
             throw new CustomException(ExceptionCode.FAILED_TO_FIND_STUDENTS_LIST);
@@ -122,5 +128,79 @@ public class StudentsListService {
                         .map(StudentsResponseDTO::new)
                         .collect(Collectors.toList()))
                 .build();
+    }
+
+    @Transactional
+    public StudentsListResponseDTO updateStudentsList(
+            final StudentsListUpdateRequestDTO studentsListUpdateRequestDTO,
+            final Long studentsListId,
+            final Long userId
+    ){
+
+        final String name = studentsListUpdateRequestDTO.getName();
+
+        final StudentsList studentsList;
+        try{
+            studentsList = studentsListRepository.findById(studentsListId).get();
+        } catch (NoSuchElementException ex){
+            throw new CustomException(ExceptionCode.DATA_NOT_EXIST);
+        } catch (Exception ex){
+            log.error("StudentsListService.updateStudentsList message:{}",ex.getMessage(),ex);
+            throw new CustomException(ExceptionCode.FAILED_TO_FIND_STUDENTS_LIST);
+        }
+
+        //다른 사람 정보 수정 막기
+        if(!studentsList.getUsers().getId().equals(userId)){
+            throw new CustomException(ExceptionCode.INVALID_ACCESS);
+        }
+
+        //null 값 예외 처리하기
+        if(StringUtils.isEmpty(name)){
+            throw new CustomException(ExceptionCode.BAD_REQUEST);
+        }
+
+        studentsList.updateName(name);
+
+        return StudentsListResponseDTO
+                .builder()
+                .id(studentsList.getId())
+                .createdAt(studentsList.getCreatedAt())
+                .name(studentsList.getName())
+                .studentsCount(studentsList.getStudentsCount())
+                .studentsList(studentsList.getStudentsList()
+                        .stream()
+                        .map(StudentsResponseDTO::new)
+                        .collect(Collectors.toList()))
+                .build();
+    }
+
+    public void deleteStudentsList(
+            final Long studentsListId,
+            final Long userId
+    ){
+
+        final StudentsList studentsList;
+        try{
+            studentsList = studentsListRepository.findById(studentsListId).get();
+        } catch (NoSuchElementException ex){
+            throw new CustomException(ExceptionCode.DATA_NOT_EXIST);
+        } catch (Exception ex){
+            log.error("StudentsListService.deleteStudentsList message:{}",ex.getMessage(),ex);
+            throw new CustomException(ExceptionCode.FAILED_TO_FIND_STUDENTS_LIST);
+        }
+
+        //다른 사용자의 접근 막기
+        if(!studentsList.getUsers().getId().equals(userId)){
+            throw new CustomException(ExceptionCode.INVALID_ACCESS);
+        }
+
+        try{
+            studentsListRepository.deleteById(studentsListId);
+        } catch (NoSuchElementException ex){
+            throw new CustomException(ExceptionCode.DATA_NOT_EXIST);
+        } catch (Exception ex){
+            log.error("StudentsListService.deleteStudentsList message:{}",ex.getMessage(),ex);
+            throw new CustomException(ExceptionCode.FAILED_TO_DELETE_DATA);
+        }
     }
 }

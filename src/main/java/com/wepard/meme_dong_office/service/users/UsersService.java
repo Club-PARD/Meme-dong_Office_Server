@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @Service
@@ -80,6 +81,8 @@ public class UsersService {
         final Users users;
         try{
             users = usersRepository.findById(userId).get();
+        } catch (NoSuchElementException ex){
+            throw new CustomException(ExceptionCode.DATA_NOT_EXIST);
         } catch (Exception ex){
             log.error("UsersService.getUsers message:{}",ex.getMessage(),ex);
             throw new CustomException(ExceptionCode.FAILED_TO_FIND_USER);

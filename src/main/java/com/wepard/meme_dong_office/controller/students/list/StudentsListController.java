@@ -1,6 +1,7 @@
 package com.wepard.meme_dong_office.controller.students.list;
 
 import com.wepard.meme_dong_office.dto.students.list.request.StudentsListRequestDTO;
+import com.wepard.meme_dong_office.dto.students.list.request.StudentsListUpdateRequestDTO;
 import com.wepard.meme_dong_office.dto.students.list.response.StudentsListResponseDTO;
 import com.wepard.meme_dong_office.dto.users.response.UsersResponseDTO;
 import com.wepard.meme_dong_office.security.TokenProvider;
@@ -41,8 +42,8 @@ public class StudentsListController {
             )
     })
     public ResponseEntity<?> createStudentsList(
-            @RequestHeader(value = "Authorization") String token,
-            @RequestBody StudentsListRequestDTO studentsListRequestDTO
+            @RequestHeader(value = "Authorization") final String token,
+            @RequestBody final StudentsListRequestDTO studentsListRequestDTO
     ){
 
         final Long userId = Long.parseLong(
@@ -83,5 +84,49 @@ public class StudentsListController {
         return ResponseEntity.ok().body(
                 studentsListService.getStudentsList(id, userId)
         );
+    }
+
+    @PatchMapping("/list/{id}")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "학급 정보 수정 성공",
+                    content = @Content(schema = @Schema(implementation = StudentsListResponseDTO.class))
+            )
+    })
+    public ResponseEntity<?> updateStudentsList(
+            @PathVariable final Long id,
+            @RequestHeader(value = "Authorization") final String token,
+            @RequestBody final StudentsListUpdateRequestDTO studentsListUpdateRequestDTO
+    ){
+
+        final Long userId = Long.parseLong(
+                tokenProvider.validate(token.substring(7))
+        );
+
+        return ResponseEntity.ok().body(
+          studentsListService.updateStudentsList(studentsListUpdateRequestDTO, id, userId)
+        );
+    }
+
+    @DeleteMapping("/list/{id}")
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "204",
+                    description = "학급 정보 삭제 성공"
+            )
+    })
+    public ResponseEntity<?> deleteStudentsList(
+            @PathVariable final Long id,
+            @RequestHeader(value = "Authorization") final String token
+    ){
+
+        final Long userId = Long.parseLong(
+                tokenProvider.validate(token.substring(7))
+        );
+
+        studentsListService.deleteStudentsList(id, userId);
+
+        return ResponseEntity.noContent().build();
     }
 }

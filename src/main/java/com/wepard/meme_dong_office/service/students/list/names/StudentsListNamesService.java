@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 @Slf4j
@@ -36,6 +37,8 @@ public class StudentsListNamesService {
 
         try{
             studentsList = studentsListRepository.findById(studentsListId).get();
+        } catch (NoSuchElementException ex){
+            throw new CustomException(ExceptionCode.DATA_NOT_EXIST);
         } catch (Exception ex){
             log.error("StudentsListNamesService.getStudentsListNames message:{}",ex.getMessage(),ex);
             throw new CustomException(ExceptionCode.FAILED_TO_FIND_STUDENTS_LIST);

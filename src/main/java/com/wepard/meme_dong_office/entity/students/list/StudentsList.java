@@ -47,4 +47,10 @@ public class StudentsList {
         this.studentsCount = studentsCount;
         this.users = users;
     }
+
+    public void updateName(
+            final String name
+    ){
+        this.name = name;
+    }
 }
