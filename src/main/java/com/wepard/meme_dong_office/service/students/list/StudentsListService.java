@@ -12,7 +12,6 @@ import com.wepard.meme_dong_office.exception.constants.ExceptionCode;
 import com.wepard.meme_dong_office.repository.StudentsListRepository;
 import com.wepard.meme_dong_office.repository.StudentsRepository;
 import com.wepard.meme_dong_office.repository.UsersRepository;
-import com.wepard.meme_dong_office.service.students.StudentsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,8 +40,8 @@ public class StudentsListService {
     }
 
     public Long createStudentsList(
-            StudentsListRequestDTO studentsListRequestDTO,
-            Long userId
+            final StudentsListRequestDTO studentsListRequestDTO,
+            final Long userId
     ){
 
         final Users users;
@@ -93,5 +92,35 @@ public class StudentsListService {
         }
 
         return savedStudentsList.getId();
+    }
+
+    public StudentsListResponseDTO getStudentsList(
+            final Long studentsListId,
+            final Long userId
+    ){
+        final StudentsList studentsList;
+        try{
+            studentsList = studentsListRepository.findById(studentsListId).get();
+        } catch (Exception ex){
+            log.error("StudentsListService.getStudentsList message:{}",ex.getMessage(),ex);
+            throw new CustomException(ExceptionCode.FAILED_TO_FIND_STUDENTS_LIST);
+        }
+
+        //다른 유저의 정보 접근 막기
+        if(!studentsList.getUsers().getId().equals(userId)){
+            throw new CustomException(ExceptionCode.INVALID_ACCESS);
+        }
+
+        return StudentsListResponseDTO
+                .builder()
+                .id(studentsList.getId())
+                .createdAt(studentsList.getCreatedAt())
+                .name(studentsList.getName())
+                .studentsCount(studentsList.getStudentsCount())
+                .studentsList(studentsList.getStudentsList()
+                        .stream()
+                        .map(StudentsResponseDTO::new)
+                        .collect(Collectors.toList()))
+                .build();
     }
 }

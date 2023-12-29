@@ -14,6 +14,7 @@ public enum ExceptionCode {
     EMAIL_DUPLICATE(HttpStatus.CONFLICT, "User email is already exist."),
 
     //500~
+    FAILED_TO_FIND_STUDENTS_LIST(HttpStatus.INTERNAL_SERVER_ERROR, "Failed to find students list."),
     FAILED_TO_FIND_USER(HttpStatus.INTERNAL_SERVER_ERROR, "Failed to find user."),
     FAILED_TO_CREATE_STUDENTS_LIST(HttpStatus.INTERNAL_SERVER_ERROR, "Failed to create students list."),
     INTERNAL_SERVER_ERROR(HttpStatus.INTERNAL_SERVER_ERROR, "Server Error");
