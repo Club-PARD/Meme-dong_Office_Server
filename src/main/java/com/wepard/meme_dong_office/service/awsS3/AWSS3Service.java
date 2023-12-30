@@ -51,8 +51,8 @@ public class AWSS3Service {
         try {
             objectMetadata.setContentLength(multipartFile.getInputStream().available());
             amazonS3.putObject(bucket, fileName, multipartFile.getInputStream(), objectMetadata);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        } catch (IOException ex) {
+            throw new CustomException(ExceptionCode.FAILED_TO_GET_DATA);
         }
 
         return CloudFrontURL+"/"+fileName;
