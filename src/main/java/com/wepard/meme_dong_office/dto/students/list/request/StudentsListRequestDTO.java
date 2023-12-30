@@ -10,13 +10,22 @@ import java.util.List;
 @Builder
 public class StudentsListRequestDTO {
     private String name;
+    private Integer listRow;
+    private Integer listCol;
+    private Integer seatSpacing;
     private List<StudentsRequestDTO> studentsList;
 
     public StudentsListRequestDTO(
-            String name,
-            List<StudentsRequestDTO> studentsList
+            final String name,
+            final Integer listRow,
+            final Integer listCol,
+            final Integer seatSpacing,
+            final List<StudentsRequestDTO> studentsList
     ){
         this.name = name;
+        this.listRow = listRow;
+        this.listCol = listCol;
+        this.seatSpacing = seatSpacing;
         this.studentsList = studentsList;
     }
 }

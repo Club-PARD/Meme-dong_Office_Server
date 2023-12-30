@@ -22,6 +22,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -58,12 +59,18 @@ public class StudentsListService {
 
 
         final String name = studentsListRequestDTO.getName();
+        final Integer listRow = studentsListRequestDTO.getListRow();
+        final Integer listCol = studentsListRequestDTO.getListCol();
+        final Integer seatSpacing = studentsListRequestDTO.getSeatSpacing();
         final List<StudentsRequestDTO> students = studentsListRequestDTO.getStudentsList();
         final Integer studentsCount = students.size();
 
         final StudentsList savedStudentsList;
         final StudentsList putStudentsList = StudentsList.builder()
                 .name(name)
+                .listRow(listRow)
+                .listCol(listCol)
+                .seatSpacing(seatSpacing)
                 .studentsCount(studentsCount)
                 .users(users)
                 .build();
@@ -122,6 +129,9 @@ public class StudentsListService {
                 .id(studentsList.getId())
                 .createdAt(studentsList.getCreatedAt())
                 .name(studentsList.getName())
+                .listRow(studentsList.getListRow())
+                .listCol(studentsList.getListCol())
+                .seatSpacing(studentsList.getSeatSpacing())
                 .studentsCount(studentsList.getStudentsCount())
                 .studentsList(studentsList.getStudentsList()
                         .stream()
@@ -138,6 +148,9 @@ public class StudentsListService {
     ){
 
         final String name = studentsListUpdateRequestDTO.getName();
+        final Integer listRow = studentsListUpdateRequestDTO.getListRow();
+        final Integer listCol = studentsListUpdateRequestDTO.getListCol();
+        final Integer seatSpacing = studentsListUpdateRequestDTO.getSeatSpacing();
 
         final StudentsList studentsList;
         try{
@@ -154,18 +167,34 @@ public class StudentsListService {
             throw new CustomException(ExceptionCode.INVALID_ACCESS);
         }
 
-        //null 값 예외 처리하기
+        //이름이 비어있지 않다면 바꾸기
         if(StringUtils.isEmpty(name)){
-            throw new CustomException(ExceptionCode.BAD_REQUEST);
+            studentsList.updateName(name);
         }
 
-        studentsList.updateName(name);
+        //row 비어있지 않다면 바꾸기
+        if(Optional.ofNullable(listRow).isPresent()){
+            studentsList.updateListRow(listRow);
+        }
+
+        //col 비어있지 않다면 바꾸기
+        if(Optional.ofNullable(listCol).isPresent()){
+            studentsList.updateListCol(listCol);
+        }
+
+        //seatSpacing 비어있지 않다면 바꾸기
+        if(Optional.ofNullable(seatSpacing).isPresent()){
+            studentsList.updateSeatSpacing(seatSpacing);
+        }
 
         return StudentsListResponseDTO
                 .builder()
                 .id(studentsList.getId())
                 .createdAt(studentsList.getCreatedAt())
                 .name(studentsList.getName())
+                .listRow(studentsList.getListRow())
+                .listCol(studentsList.getListCol())
+                .seatSpacing(studentsList.getSeatSpacing())
                 .studentsCount(studentsList.getStudentsCount())
                 .studentsList(studentsList.getStudentsList()
                         .stream()

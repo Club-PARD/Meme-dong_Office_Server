@@ -159,12 +159,12 @@ public class StudentsService {
         }
 
         //요주의 인물 비어있지 않을 때 업데이트
-        if(!Optional.ofNullable(isCaution).isPresent()){
+        if(Optional.ofNullable(isCaution).isPresent()){
             students.updateIsCaution(isCaution);
         }
 
         //생일 비어있지 않을 때 업데이트
-        if(!Optional.ofNullable(birthday).isPresent()){
+        if(Optional.ofNullable(birthday).isPresent()){
             students.updateBirthday(birthday);
         }
 

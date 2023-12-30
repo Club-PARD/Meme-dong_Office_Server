@@ -15,6 +15,9 @@ public class StudentsListResponseDTO {
     private Long id;
     private LocalDateTime createdAt;
     private String name;
+    private Integer listRow;
+    private Integer listCol;
+    private Integer seatSpacing;
     private Integer studentsCount;
     private List<StudentsResponseDTO> studentsList;
 
@@ -23,12 +26,18 @@ public class StudentsListResponseDTO {
             Long id,
             LocalDateTime createdAt,
             String name,
+            Integer listRow,
+            Integer listCol,
+            Integer seatSpacing,
             Integer studentsCount,
             List<StudentsResponseDTO> studentsList
     ){
         this.id = id;
         this.createdAt = createdAt;
         this.name = name;
+        this.listRow = listRow;
+        this.listCol = listCol;
+        this.seatSpacing = seatSpacing;
         this.studentsCount = studentsCount;
         this.studentsList = studentsList;
     }
@@ -39,6 +48,9 @@ public class StudentsListResponseDTO {
         this.id = studentsList.getId();
         this.createdAt = studentsList.getCreatedAt();
         this.name = studentsList.getName();
+        this.listRow = studentsList.getListRow();
+        this.listCol = studentsList.getListCol();
+        this.seatSpacing = studentsList.getSeatSpacing();
         this.studentsCount = studentsList.getStudentsCount();
         this.studentsList = studentsList.getStudentsList()
                 .stream()

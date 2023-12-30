@@ -28,6 +28,12 @@ public class StudentsList {
     @Column(length = 30)
     private String name;
 
+    private Integer listRow;
+
+    private Integer listCol;
+
+    private Integer seatSpacing;
+
     private Integer studentsCount;
 
     @OneToMany(mappedBy = "studentsList", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -40,10 +46,16 @@ public class StudentsList {
     @Builder
     public StudentsList(
             String name,
+            Integer listRow,
+            Integer listCol,
+            Integer seatSpacing,
             Integer studentsCount,
             Users users
     ){
         this.name = name;
+        this.listRow = listRow;
+        this.listCol = listCol;
+        this.seatSpacing = seatSpacing;
         this.studentsCount = studentsCount;
         this.users = users;
     }
@@ -52,5 +64,23 @@ public class StudentsList {
             final String name
     ){
         this.name = name;
+    }
+
+    public void updateListRow(
+            final Integer listRow
+    ){
+        this.listRow = listRow;
+    }
+
+    public void updateListCol(
+            final Integer listCol
+    ){
+        this.listCol = listCol;
+    }
+
+    public void updateSeatSpacing(
+            final Integer seatSpacing
+    ){
+        this.seatSpacing = seatSpacing;
     }
 }
