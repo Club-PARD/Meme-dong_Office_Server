@@ -313,7 +313,7 @@
   **Request**
 
     {
-    	"studentsListId":1, //등록하고 싶은 학급(studentList)의 아이디 번호 써주기
+      "studentsListId":1, //등록하고 싶은 학급(studentList)의 아이디 번호 써주기
       "name": "학생 명",
       "imageURL": "학생 사진 url",
       "birthday": "2023-12-28T05:52:45.378Z",
@@ -345,7 +345,7 @@
   **Response**
 
     {
-    	"id":1, //등록 된 학생의 아이디
+      "id":1, //등록 된 학생의 아이디
       "name": "학생 명",
       "imageURL": "학생 사진 url",
       "birthday": "2023-12-28T05:52:45.378Z",
@@ -368,7 +368,7 @@
   **Request**
 
     {
-    	"studentsListId":1, //등록하고 싶은 학급(studentList)의 아이디 번호 써주기
+      "studentsListId":1, //등록하고 싶은 학급(studentList)의 아이디 번호 써주기
       "name": "학생 명",
       "imageURL": "학생 사진 url",
       "birthday": "2023-12-28T05:52:45.378Z",
@@ -381,7 +381,7 @@
   **Response**
 
     {
-    	"id":1, //등록 된 학생의 아이디
+      "id":1, //등록 된 학생의 아이디
       "name": "학생 명",
       "imageURL": "학생 사진 url",
       "birthday": "2023-12-28T05:52:45.378Z",
@@ -462,9 +462,9 @@
 
     {
       "name": "저장 하고 싶은 이름", 
-    	"listRow":"row 값",
-    	"listCol":"col 값",
-    	"seatSpacing":"몇 칸마다 띄울지",
+      "listRow":"row 값",
+      "listCol":"col 값",
+      "seatSpacing":"몇 칸마다 띄울지",
       "studentsList": [
         {
           "name": "학생 명",
@@ -509,9 +509,9 @@
 
     {
       "name": "저장 하고 싶은 이름", 
-    	"listRow":"row 값",
-    	"listCol":"col 값",
-    	"seatSpacing":"몇 칸마다 띄울지",
+      "listRow":"row 값",
+      "listCol":"col 값",
+      "seatSpacing":"몇 칸마다 띄울지",
       "studentsList": [
         {
           "name": "학생 명",
@@ -573,19 +573,19 @@
 
     {
       "name": "저장 하고 싶은 이름",
-    	"listRow":"row 값",
-    	"listCol":"col 값",
-    	"seatSpacing":"몇 칸마다 띄울지"
+      "listRow":"row 값",
+      "listCol":"col 값",
+      "seatSpacing":"몇 칸마다 띄울지"
     }
 
   **Response**
 
     {
-    	"id":1, //학급 번호
+      "id":1, //학급 번호
       "name": "저장 하고 싶은 이름", 
-    	"listRow":"row 값",
-    	"listCol":"col 값",
-    	"seatSpacing":"몇 칸마다 띄울지",
+      "listRow":"row 값",
+      "listCol":"col 값",
+      "seatSpacing":"몇 칸마다 띄울지",
       "studentsList": [
         {
           "name": "학생 명",
