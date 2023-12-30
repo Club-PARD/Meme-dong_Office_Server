@@ -1,6 +1,7 @@
 package com.wepard.meme_dong_office.service.token;
 
 import com.wepard.meme_dong_office.config.WebSecurityConfig;
+import com.wepard.meme_dong_office.dto.refreshToken.request.RefreshTokenRequestDTO;
 import com.wepard.meme_dong_office.dto.token.request.TokenRequestDTO;
 import com.wepard.meme_dong_office.dto.token.response.TokenResponseDTO;
 import com.wepard.meme_dong_office.entity.users.Users;
@@ -34,7 +35,9 @@ public class TokenService {
     };
 
 
-    public TokenResponseDTO signIn(final TokenRequestDTO tokenRequestDTO){
+    public TokenResponseDTO signIn(
+            final TokenRequestDTO tokenRequestDTO
+    ){
         final Users users;
         final String email = tokenRequestDTO.getEmail();
 
@@ -73,6 +76,28 @@ public class TokenService {
 
     }
 
+    public TokenResponseDTO refreshToken(
+            final RefreshTokenRequestDTO refreshTokenRequestDTO
+    ){
+        final String token = refreshTokenRequestDTO.getRefreshToken();
+        final Long userId = Long.parseLong(tokenProvider.validate(token));
 
+        //accessToken expire time : 1 hour, 엑세스 토큰 유효 시간 : 1시간
+        final String accessToken = tokenProvider.createToken(userId, 1);
+        //refreshToken expire time : 2 weeks, 리프레시 토큰 유효 시간 : 2주
+        final String refreshToken = tokenProvider.createToken(userId, 336);
+        //accessToken expire time (second), 엑세스 토큰 유효 시간 (초)
+        final Integer exprTime = 3600;
+
+        final String tokenType = tokenProvider.getTokenType();
+
+        return TokenResponseDTO.builder()
+                .accessToken(accessToken)
+                .tokenType(tokenType)
+                .refreshToken(refreshToken)
+                .exprTime(exprTime)
+                .userId(userId)
+                .build();
+    }
 
 }

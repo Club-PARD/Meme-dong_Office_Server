@@ -38,7 +38,9 @@ public class TokenController {
                     content = @Content(schema = @Schema(implementation = TokenResponseDTO.class))
             )
     })
-    public ResponseEntity<?> getToken(@RequestBody TokenRequestDTO tokenRequestDTO){
+    public ResponseEntity<?> getToken(
+            @RequestBody TokenRequestDTO tokenRequestDTO
+    ){
         return ResponseEntity
                 .ok()
                 .body(tokenService.signIn(tokenRequestDTO));
