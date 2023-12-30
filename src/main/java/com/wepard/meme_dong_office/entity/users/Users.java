@@ -44,4 +44,22 @@ public class Users {
         this.email = email;
         this.hashedPassword = hashedPassword;
     }
+
+    public void updateEmail(
+            final String email
+    ){
+        this.email = email;
+    }
+
+    public void updatePassword(
+            final String hashedPassword
+    ){
+        this.hashedPassword = hashedPassword;
+    }
+
+    public void updateName(
+            final String name
+    ){
+        this.name = name;
+    }
 }

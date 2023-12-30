@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.NoSuchElementException;
+
 @Service
 @Slf4j
 public class StudentsImagesService {
@@ -38,6 +40,8 @@ public class StudentsImagesService {
         final Students students;
         try{
             students = studentsRepository.findById(studentsId).get();
+        } catch (NoSuchElementException ex){
+            throw new CustomException(ExceptionCode.DATA_NOT_EXIST);
         } catch (Exception ex){
             log.error("StudentsImagesService.uploadStudentsImages message:{}",ex.getMessage(),ex);
             throw new CustomException(ExceptionCode.FAILED_TO_FIND_STUDENTS);
@@ -64,6 +68,8 @@ public class StudentsImagesService {
         final Students students;
         try{
             students = studentsRepository.findById(studentsId).get();
+        } catch (NoSuchElementException ex){
+            throw new CustomException(ExceptionCode.DATA_NOT_EXIST);
         } catch (Exception ex){
             log.error("StudentsImagesService.uploadStudentsImages message:{}",ex.getMessage(),ex);
             throw new CustomException(ExceptionCode.FAILED_TO_FIND_STUDENTS);

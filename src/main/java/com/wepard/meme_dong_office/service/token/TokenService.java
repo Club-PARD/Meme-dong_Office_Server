@@ -41,7 +41,6 @@ public class TokenService {
         try{
             users = usersRepository.findByEmail(email).get();
         } catch (NoSuchElementException ex){
-            log.error("TokenService.signIn:{}",ex.getMessage(),ex);
             throw new CustomException(ExceptionCode.LOGIN_FAILED);
         }
 
