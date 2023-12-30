@@ -28,7 +28,7 @@ public class Students {
     private String imageURL;
 
     @Column(columnDefinition = "BOOLEAN DEFAULT false")
-    private boolean isCaution; //요주의 인물인지
+    private Boolean isCaution; //요주의 인물인지
 
     private LocalDateTime birthday;
 
@@ -50,7 +50,7 @@ public class Students {
             final StudentsList studentsList,
             final String name,
             final String imageURL,
-            final boolean isCaution,
+            final Boolean isCaution,
             final LocalDateTime birthday,
             final String allergy,
             final String studyLevel,
@@ -59,16 +59,71 @@ public class Students {
         this.studentsList = studentsList;
         this.name = name;
         this.imageURL = imageURL;
-        this.isCaution = isCaution;
+        //null일 때 기본 값 지정
+        if(isCaution == null){
+            this.isCaution = false;
+        }
+        else{
+            this.isCaution = isCaution;
+        }
         this.birthday = birthday;
         this.allergy = allergy;
         this.studyLevel = studyLevel;
         this.etc = etc;
     }
 
+    public void updateStudentsList(
+            final StudentsList studentsList
+    ){
+        this.studentsList = studentsList;
+    }
+
+    public void updateName(
+            final String name
+    ){
+        this.name = name;
+    }
+
     public void updateImageURL(
             final String imageURL
     ){
         this.imageURL = imageURL;
+    }
+
+    public void updateIsCaution(
+            final Boolean isCaution
+    ){
+
+        //null일 때 기본 값 지정
+        if(isCaution == null){
+            this.isCaution = false;
+        }
+        else{
+            this.isCaution = isCaution;
+        }
+    }
+
+    public void updateBirthday(
+            final LocalDateTime birthday
+    ){
+        this.birthday = birthday;
+    }
+
+    public void updateAllergy(
+            final String allergy
+    ){
+        this.allergy = allergy;
+    }
+
+    public void updateStudyLevel(
+            final String studyLevel
+    ){
+        this.studyLevel = studyLevel;
+    }
+
+    public void updateEtc(
+            final String etc
+    ){
+        this.etc = etc;
     }
 }

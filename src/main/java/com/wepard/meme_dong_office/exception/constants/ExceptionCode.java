@@ -17,6 +17,7 @@ public enum ExceptionCode {
     EMAIL_DUPLICATE(HttpStatus.CONFLICT, "User email is already exist."),
 
     //500~
+    FAILED_TO_CREATE_STUDENTS(HttpStatus.INTERNAL_SERVER_ERROR, "Failed to create students."),
     FAILED_TO_GET_DATA(HttpStatus.INTERNAL_SERVER_ERROR, "Failed to get data."),
     FAILED_TO_DELETE_DATA(HttpStatus.INTERNAL_SERVER_ERROR, "Failed to delete data."),
     FAILED_TO_FIND_STUDENTS(HttpStatus.INTERNAL_SERVER_ERROR, "Failed to find students."),

@@ -23,7 +23,7 @@ public class StudentsResponseDTO {
             final Long id,
             final String name,
             final String imageURL,
-            final boolean isCaution,
+            final Boolean isCaution,
             final LocalDateTime birthday,
             final String allergy,
             final String studyLevel,
@@ -45,7 +45,13 @@ public class StudentsResponseDTO {
         this.id = students.getId();
         this.name = students.getName();
         this.imageURL = students.getImageURL();
-        this.isCaution = students.isCaution();
+        //null일 때 기본 값 지정
+        if(students.getIsCaution() == null){
+            this.isCaution = false;
+        }
+        else{
+            this.isCaution = isCaution;
+        }
         this.birthday = students.getBirthday();
         this.allergy = students.getAllergy();
         this.studyLevel = students.getStudyLevel();
