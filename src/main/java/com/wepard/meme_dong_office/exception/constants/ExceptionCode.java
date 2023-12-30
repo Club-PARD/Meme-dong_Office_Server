@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 @AllArgsConstructor
 public enum ExceptionCode {
     //400~
+    INVALID_INPUT(HttpStatus.NOT_ACCEPTABLE, "Invalid input."),
     INVALID_FILE(HttpStatus.NOT_ACCEPTABLE, "Invalid file."),
     DATA_NOT_EXIST(HttpStatus.NOT_ACCEPTABLE, "Data not exist."),
     BAD_REQUEST(HttpStatus.BAD_REQUEST, "Request is missing or empty."),

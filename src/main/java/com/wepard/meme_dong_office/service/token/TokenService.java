@@ -10,6 +10,7 @@ import com.wepard.meme_dong_office.exception.constants.ExceptionCode;
 import com.wepard.meme_dong_office.repository.UsersRepository;
 import com.wepard.meme_dong_office.security.TokenProvider;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,6 +41,11 @@ public class TokenService {
     ){
         final Users users;
         final String email = tokenRequestDTO.getEmail();
+        final String password = tokenRequestDTO.getPassword();
+
+        if(StringUtils.containsAny(password, "'", "\"", "\\")){
+            throw new CustomException(ExceptionCode.INVALID_INPUT);
+        }
 
         try{
             users = usersRepository.findByEmail(email).get();
@@ -48,7 +54,7 @@ public class TokenService {
         }
 
         boolean isPasswordMatch = webSecurityConfig.getPasswordEncoder().matches(
-                tokenRequestDTO.getPassword(),
+                password,
                 users.getHashedPassword()
         );
 

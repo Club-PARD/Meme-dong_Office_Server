@@ -41,9 +41,15 @@ public class UsersService {
     public TokenResponseDTO signUp(final UsersRequestDTO usersRequestDTO){
 
         final String email = usersRequestDTO.getEmail();
+        final String password = usersRequestDTO.getPassword();
+
+        if(StringUtils.containsAny(password, "'", "\"", "\\")){
+            throw new CustomException(ExceptionCode.INVALID_INPUT);
+        }
+
         final String hashedPassword = webSecurityConfig
                 .getPasswordEncoder()
-                .encode(usersRequestDTO.getPassword());
+                .encode(password);
 
         boolean isEmailExist;
         try{
