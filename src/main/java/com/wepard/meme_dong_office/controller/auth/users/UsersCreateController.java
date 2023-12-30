@@ -1,5 +1,6 @@
 package com.wepard.meme_dong_office.controller.auth.users;
 
+import com.wepard.meme_dong_office.dto.token.response.TokenResponseDTO;
 import com.wepard.meme_dong_office.dto.users.request.UsersRequestDTO;
 import com.wepard.meme_dong_office.dto.users.response.UsersResponseDTO;
 import com.wepard.meme_dong_office.service.users.UsersService;
@@ -33,20 +34,16 @@ public class UsersCreateController {
     @PostMapping("/users")
     @ApiResponses(value = {
             @ApiResponse(
-                    responseCode = "201",
-                    description = "유저 생성 성공"
+                    responseCode = "200",
+                    description = "유저 생성 성공",
+                    content = @Content(schema = @Schema(implementation = TokenResponseDTO.class))
             )
     })
     public ResponseEntity<?> createUsers(
             @RequestBody final UsersRequestDTO usersRequestDTO
     ){
-        final Long savedUserId = usersService.signUp(usersRequestDTO);
-
-        final URI location = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/api/v1/user/{id}")
-                .buildAndExpand(savedUserId)
-                .toUri();
-
-        return ResponseEntity.created(location).build();
+        return ResponseEntity.ok().body(
+                usersService.signUp(usersRequestDTO)
+        );
     }
 }

@@ -9,6 +9,7 @@ import com.wepard.meme_dong_office.entity.users.Users;
 import com.wepard.meme_dong_office.exception.CustomException;
 import com.wepard.meme_dong_office.exception.constants.ExceptionCode;
 import com.wepard.meme_dong_office.repository.UsersRepository;
+import com.wepard.meme_dong_office.security.TokenProvider;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -24,17 +25,20 @@ public class UsersService {
 
     private final UsersRepository usersRepository;
     private final WebSecurityConfig webSecurityConfig;
+    private final TokenProvider tokenProvider;
 
     @Autowired
     public UsersService(
             final UsersRepository usersRepository,
-            final WebSecurityConfig webSecurityConfig
+            final WebSecurityConfig webSecurityConfig,
+            final TokenProvider tokenProvider
     ){
         this.usersRepository = usersRepository;
         this.webSecurityConfig = webSecurityConfig;
+        this.tokenProvider = tokenProvider;
     }
 
-    public Long signUp(final UsersRequestDTO usersRequestDTO){
+    public TokenResponseDTO signUp(final UsersRequestDTO usersRequestDTO){
 
         final String email = usersRequestDTO.getEmail();
         final String hashedPassword = webSecurityConfig
@@ -68,7 +72,22 @@ public class UsersService {
             throw new CustomException(ExceptionCode.INTERNAL_SERVER_ERROR);
         }
 
-        return savedUsers.getId();
+        //accessToken expire time : 1 hour, 엑세스 토큰 유효 시간 : 1시간
+        final String accessToken = tokenProvider.createToken(savedUsers.getId(), 1);
+        //refreshToken expire time : 2 weeks, 리프레시 토큰 유효 시간 : 2주
+        final String refreshToken = tokenProvider.createToken(savedUsers.getId(), 336);
+        //accessToken expire time (second), 엑세스 토큰 유효 시간 (초)
+        final Integer exprTime = 3600;
+
+        final String tokenType = tokenProvider.getTokenType();
+
+        return TokenResponseDTO.builder()
+                .accessToken(accessToken)
+                .tokenType(tokenType)
+                .refreshToken(refreshToken)
+                .exprTime(exprTime)
+                .userId(savedUsers.getId())
+                .build();
     }
 
     public UsersResponseDTO getUsers(
