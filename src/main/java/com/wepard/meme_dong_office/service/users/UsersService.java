@@ -2,6 +2,7 @@ package com.wepard.meme_dong_office.service.users;
 
 import com.wepard.meme_dong_office.config.WebSecurityConfig;
 import com.wepard.meme_dong_office.dto.students.list.response.StudentsListResponseDTO;
+import com.wepard.meme_dong_office.dto.students.list.response.StudentsListSimpleResponseDTO;
 import com.wepard.meme_dong_office.dto.token.response.TokenResponseDTO;
 import com.wepard.meme_dong_office.dto.users.request.UsersRequestDTO;
 import com.wepard.meme_dong_office.dto.users.response.UsersResponseDTO;
@@ -115,10 +116,10 @@ public class UsersService {
                 .id(users.getId())
                 .email(users.getEmail())
                 .name(users.getName())
-                .studentsList(
+                .studentsListSimple(
                         users.getStudentsLists()
                                 .stream()
-                                .map(StudentsListResponseDTO::new)
+                                .map(StudentsListSimpleResponseDTO::new)
                                 .collect(Collectors.toList())
                 )
                 .build();
@@ -174,10 +175,10 @@ public class UsersService {
                 .id(users.getId())
                 .email(users.getEmail())
                 .name(users.getName())
-                .studentsList(
+                .studentsListSimple(
                         users.getStudentsLists()
                                 .stream()
-                                .map(StudentsListResponseDTO::new)
+                                .map(StudentsListSimpleResponseDTO::new)
                                 .collect(Collectors.toList())
                 )
                 .build();
