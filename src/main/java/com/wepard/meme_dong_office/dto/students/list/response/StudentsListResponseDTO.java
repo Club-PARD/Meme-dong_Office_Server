@@ -17,7 +17,7 @@ public class StudentsListResponseDTO {
     private String name;
     private Integer listRow;
     private Integer listCol;
-    private Integer seatSpacing;
+    private Boolean seatSpacing;
     private Integer studentsCount;
     private List<StudentsResponseDTO> studentsList;
 
@@ -28,7 +28,7 @@ public class StudentsListResponseDTO {
             String name,
             Integer listRow,
             Integer listCol,
-            Integer seatSpacing,
+            Boolean seatSpacing,
             Integer studentsCount,
             List<StudentsResponseDTO> studentsList
     ){

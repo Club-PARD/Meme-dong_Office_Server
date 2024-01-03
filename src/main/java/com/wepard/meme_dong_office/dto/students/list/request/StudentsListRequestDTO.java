@@ -12,14 +12,14 @@ public class StudentsListRequestDTO {
     private String name;
     private Integer listRow;
     private Integer listCol;
-    private Integer seatSpacing;
+    private Boolean seatSpacing;
     private List<StudentsRequestDTO> studentsList;
 
     public StudentsListRequestDTO(
             final String name,
             final Integer listRow,
             final Integer listCol,
-            final Integer seatSpacing,
+            final Boolean seatSpacing,
             final List<StudentsRequestDTO> studentsList
     ){
         this.name = name;

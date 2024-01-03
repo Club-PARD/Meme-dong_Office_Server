@@ -61,7 +61,7 @@ public class StudentsListService {
         final String name = studentsListRequestDTO.getName();
         final Integer listRow = studentsListRequestDTO.getListRow();
         final Integer listCol = studentsListRequestDTO.getListCol();
-        final Integer seatSpacing = studentsListRequestDTO.getSeatSpacing();
+        final Boolean seatSpacing = studentsListRequestDTO.getSeatSpacing();
         final List<StudentsRequestDTO> students = studentsListRequestDTO.getStudentsList();
         final Integer studentsCount = students.size();
 
@@ -150,7 +150,7 @@ public class StudentsListService {
         final String name = studentsListUpdateRequestDTO.getName();
         final Integer listRow = studentsListUpdateRequestDTO.getListRow();
         final Integer listCol = studentsListUpdateRequestDTO.getListCol();
-        final Integer seatSpacing = studentsListUpdateRequestDTO.getSeatSpacing();
+        final Boolean seatSpacing = studentsListUpdateRequestDTO.getSeatSpacing();
 
         final StudentsList studentsList;
         try{

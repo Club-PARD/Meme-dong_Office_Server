@@ -4,6 +4,7 @@ import com.wepard.meme_dong_office.dto.students.response.StudentsResponseDTO;
 import com.wepard.meme_dong_office.dto.test.StudentsTestDTO;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -30,5 +31,10 @@ public class TestController {
         result.add(StudentsTestDTO.builder().name("임예진").build());
 
         return result;
+    }
+
+    @GetMapping("/xss")
+    public String xssTest(@RequestParam final String s){
+        return s;
     }
 }

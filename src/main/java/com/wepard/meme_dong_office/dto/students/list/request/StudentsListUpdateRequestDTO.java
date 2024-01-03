@@ -7,5 +7,5 @@ public class StudentsListUpdateRequestDTO {
     private String name;
     private Integer listRow;
     private Integer listCol;
-    private Integer seatSpacing;
+    private Boolean seatSpacing;
 }

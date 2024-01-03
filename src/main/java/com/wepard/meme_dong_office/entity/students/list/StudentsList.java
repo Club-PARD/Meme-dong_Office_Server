@@ -32,7 +32,7 @@ public class StudentsList {
 
     private Integer listCol;
 
-    private Integer seatSpacing;
+    private Boolean seatSpacing;
 
     private Integer studentsCount;
 
@@ -48,7 +48,7 @@ public class StudentsList {
             String name,
             Integer listRow,
             Integer listCol,
-            Integer seatSpacing,
+            Boolean seatSpacing,
             Integer studentsCount,
             Users users
     ){
@@ -79,7 +79,7 @@ public class StudentsList {
     }
 
     public void updateSeatSpacing(
-            final Integer seatSpacing
+            final Boolean seatSpacing
     ){
         this.seatSpacing = seatSpacing;
     }
