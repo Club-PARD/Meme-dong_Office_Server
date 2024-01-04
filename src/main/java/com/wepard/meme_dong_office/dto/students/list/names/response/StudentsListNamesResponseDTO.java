@@ -12,7 +12,7 @@ public class StudentsListNamesResponseDTO {
 
     @Builder
     public StudentsListNamesResponseDTO(
-            List<String> nameList
+            final List<String> nameList
     ){
         this.nameList = nameList;
     }

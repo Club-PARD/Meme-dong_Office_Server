@@ -4,7 +4,7 @@ import com.wepard.meme_dong_office.security.TokenProvider;
 import com.wepard.meme_dong_office.service.students.images.StudentsImagesService;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,19 +15,11 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/api/v1")
+@RequiredArgsConstructor
 public class StudentsImagesController {
 
     private final TokenProvider tokenProvider;
     private final StudentsImagesService studentsImagesService;
-
-    @Autowired
-    public StudentsImagesController(
-            final TokenProvider tokenProvider,
-            final StudentsImagesService studentsImagesService
-    ){
-        this.tokenProvider = tokenProvider;
-        this.studentsImagesService = studentsImagesService;
-    }
 
     @PostMapping(value = "/students/{id}/images", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @ApiResponses(value = {
@@ -48,7 +40,7 @@ public class StudentsImagesController {
 
         final String imageURL = studentsImagesService.uploadStudentsImages(multipartFile, id, userId);
 
-        URI location = ServletUriComponentsBuilder
+        final URI location = ServletUriComponentsBuilder
                 .fromHttpUrl(imageURL)
                 .build()
                 .toUri();

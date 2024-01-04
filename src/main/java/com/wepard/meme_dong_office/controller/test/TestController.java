@@ -1,6 +1,5 @@
 package com.wepard.meme_dong_office.controller.test;
 
-import com.wepard.meme_dong_office.dto.students.response.StudentsResponseDTO;
 import com.wepard.meme_dong_office.dto.test.StudentsTestDTO;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

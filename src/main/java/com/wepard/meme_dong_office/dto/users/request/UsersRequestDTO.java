@@ -8,7 +8,9 @@ public class UsersRequestDTO {
     private String password;
     private String name;
 
-    public void updatePassword(final String newPassword){
+    public void updatePassword(
+            final String newPassword
+    ){
         this.password = newPassword;
     }
 }

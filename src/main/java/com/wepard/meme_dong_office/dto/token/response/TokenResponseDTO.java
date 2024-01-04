@@ -2,7 +2,6 @@ package com.wepard.meme_dong_office.dto.token.response;
 
 import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
 @Builder

@@ -1,7 +1,5 @@
 package com.wepard.meme_dong_office.security;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wepard.meme_dong_office.exception.CustomException;
 import com.wepard.meme_dong_office.exception.constants.ExceptionCode;
 import io.jsonwebtoken.Claims;
@@ -11,16 +9,10 @@ import io.jsonwebtoken.security.Keys;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.nio.charset.StandardCharsets;
 import java.security.Key;
-import java.security.PublicKey;
-import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.time.temporal.ChronoUnit;
-import java.util.Base64;
 import java.util.Date;
-import java.util.Map;
 
 @Service
 @Slf4j

@@ -1,13 +1,11 @@
 package com.wepard.meme_dong_office.entity.users;
 
-import com.wepard.meme_dong_office.dto.users.request.UsersRequestDTO;
 import com.wepard.meme_dong_office.entity.students.list.StudentsList;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static lombok.AccessLevel.PROTECTED;

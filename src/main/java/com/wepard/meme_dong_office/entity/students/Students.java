@@ -1,12 +1,10 @@
 package com.wepard.meme_dong_office.entity.students;
 
-import com.wepard.meme_dong_office.dto.students.request.StudentsRequestDTO;
 import com.wepard.meme_dong_office.entity.students.list.StudentsList;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
 
 import java.time.LocalDateTime;
 

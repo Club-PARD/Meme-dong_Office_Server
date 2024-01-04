@@ -23,14 +23,14 @@ public class StudentsListResponseDTO {
 
     @Builder
     public StudentsListResponseDTO(
-            Long id,
-            LocalDateTime createdAt,
-            String name,
-            Integer listRow,
-            Integer listCol,
-            Boolean seatSpacing,
-            Integer studentsCount,
-            List<StudentsResponseDTO> studentsList
+            final Long id,
+            final LocalDateTime createdAt,
+            final String name,
+            final Integer listRow,
+            final Integer listCol,
+            final Boolean seatSpacing,
+            final Integer studentsCount,
+            final List<StudentsResponseDTO> studentsList
     ){
         this.id = id;
         this.createdAt = createdAt;
@@ -43,7 +43,7 @@ public class StudentsListResponseDTO {
     }
 
     public StudentsListResponseDTO(
-            StudentsList studentsList
+            final StudentsList studentsList
     ){
         this.id = studentsList.getId();
         this.createdAt = studentsList.getCreatedAt();

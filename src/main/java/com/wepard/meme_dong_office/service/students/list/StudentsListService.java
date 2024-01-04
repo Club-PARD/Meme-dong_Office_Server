@@ -85,7 +85,7 @@ public class StudentsListService {
                             .studentsList(putStudentsList)
                             .name(student.getName())
                             .imageURL(student.getImageURL())
-                            .isCaution(student.isCaution())
+                            .isCaution(student.getIsCaution())
                             .birthday(student.getBirthday())
                             .allergy(student.getAllergy())
                             .studyLevel(student.getStudyLevel())

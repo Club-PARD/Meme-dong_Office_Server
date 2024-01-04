@@ -8,7 +8,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -17,19 +17,11 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/api/v1")
+@RequiredArgsConstructor
 public class StudentsController {
 
     private final TokenProvider tokenProvider;
     private final StudentsService studentsService;
-
-    @Autowired
-    public StudentsController(
-            final TokenProvider tokenProvider,
-            final StudentsService studentsService
-    ){
-        this.tokenProvider = tokenProvider;
-        this.studentsService = studentsService;
-    }
 
     @PostMapping("/students")
     @ApiResponses(value = {

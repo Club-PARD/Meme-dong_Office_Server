@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 public class StudentsRequestDTO {
     private String name;
     private String imageURL;
-    private boolean isCaution;
+    private Boolean isCaution;
     private LocalDateTime birthday;
     private String allergy;
     private String studyLevel;
@@ -20,7 +20,7 @@ public class StudentsRequestDTO {
     public StudentsRequestDTO(
             final String name,
             final String imageURL,
-            final boolean isCaution,
+            final Boolean isCaution,
             final LocalDateTime birthday,
             final String allergy,
             final String studyLevel,

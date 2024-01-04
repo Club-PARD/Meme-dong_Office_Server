@@ -3,36 +3,26 @@ package com.wepard.meme_dong_office.controller.students.list;
 import com.wepard.meme_dong_office.dto.students.list.request.StudentsListRequestDTO;
 import com.wepard.meme_dong_office.dto.students.list.request.StudentsListUpdateRequestDTO;
 import com.wepard.meme_dong_office.dto.students.list.response.StudentsListResponseDTO;
-import com.wepard.meme_dong_office.dto.users.response.UsersResponseDTO;
 import com.wepard.meme_dong_office.security.TokenProvider;
 import com.wepard.meme_dong_office.service.students.list.StudentsListService;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/students")
+@RequiredArgsConstructor
 public class StudentsListController {
 
     private final StudentsListService studentsListService;
     private final TokenProvider tokenProvider;
-
-    @Autowired
-    public StudentsListController(
-            StudentsListService studentsListService,
-            TokenProvider tokenProvider
-    ){
-        this.studentsListService = studentsListService;
-        this.tokenProvider = tokenProvider;
-    }
 
     @PostMapping("/list")
     @ApiResponses(value = {

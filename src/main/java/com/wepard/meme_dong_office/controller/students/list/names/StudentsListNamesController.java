@@ -7,25 +7,17 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/students/list")
+@RequiredArgsConstructor
 public class StudentsListNamesController {
 
     private final StudentsListNamesService studentsListNamesService;
     private final TokenProvider tokenProvider;
-
-    @Autowired
-    public StudentsListNamesController(
-            StudentsListNamesService studentsListNamesService,
-            TokenProvider tokenProvider
-    ){
-        this.studentsListNamesService = studentsListNamesService;
-        this.tokenProvider = tokenProvider;
-    }
 
     @GetMapping("/names/{id}")
     @ApiResponses(value = {

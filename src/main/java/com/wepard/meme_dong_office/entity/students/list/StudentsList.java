@@ -45,12 +45,12 @@ public class StudentsList {
 
     @Builder
     public StudentsList(
-            String name,
-            Integer listRow,
-            Integer listCol,
-            Boolean seatSpacing,
-            Integer studentsCount,
-            Users users
+            final String name,
+            final Integer listRow,
+            final Integer listCol,
+            final Boolean seatSpacing,
+            final Integer studentsCount,
+            final Users users
     ){
         this.name = name;
         this.listRow = listRow;
