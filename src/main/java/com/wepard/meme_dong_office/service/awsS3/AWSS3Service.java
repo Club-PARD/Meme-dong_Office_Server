@@ -4,6 +4,7 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.wepard.meme_dong_office.exception.CustomException;
 import com.wepard.meme_dong_office.exception.constants.ExceptionCode;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,16 +19,10 @@ import java.util.UUID;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class AWSS3Service {
 
     private final AmazonS3 amazonS3;
-
-    @Autowired
-    public AWSS3Service(
-            final AmazonS3 amazonS3
-    ){
-        this.amazonS3 = amazonS3;
-    }
 
     @Value("${cloud.aws.s3.bucket}")
     private String bucket;

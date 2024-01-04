@@ -6,6 +6,7 @@ import com.wepard.meme_dong_office.entity.students.list.StudentsList;
 import com.wepard.meme_dong_office.exception.CustomException;
 import com.wepard.meme_dong_office.exception.constants.ExceptionCode;
 import com.wepard.meme_dong_office.repository.StudentsListRepository;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,16 +17,10 @@ import java.util.NoSuchElementException;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class StudentsListNamesService {
 
     private final StudentsListRepository studentsListRepository;
-
-    @Autowired
-    public StudentsListNamesService(
-            final StudentsListRepository studentsListRepository
-    ){
-        this.studentsListRepository = studentsListRepository;
-    }
 
     public StudentsListNamesResponseDTO getStudentsListNames(
             final Long studentsListId,

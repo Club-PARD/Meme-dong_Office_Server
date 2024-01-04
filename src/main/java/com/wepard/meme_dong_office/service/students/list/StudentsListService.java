@@ -14,6 +14,7 @@ import com.wepard.meme_dong_office.repository.StudentsListRepository;
 import com.wepard.meme_dong_office.repository.StudentsRepository;
 import com.wepard.meme_dong_office.repository.UsersRepository;
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,22 +28,12 @@ import java.util.stream.Collectors;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class StudentsListService {
 
     private final StudentsListRepository studentsListRepository;
     private final StudentsRepository studentsRepository;
     private final UsersRepository usersRepository;
-
-    @Autowired
-    public StudentsListService(
-            final StudentsListRepository studentsListRepository,
-            final StudentsRepository studentsRepository,
-            final UsersRepository usersRepository
-    ){
-        this.studentsListRepository = studentsListRepository;
-        this.studentsRepository = studentsRepository;
-        this.usersRepository = usersRepository;
-    }
 
     public Long createStudentsList(
             final StudentsListRequestDTO studentsListRequestDTO,

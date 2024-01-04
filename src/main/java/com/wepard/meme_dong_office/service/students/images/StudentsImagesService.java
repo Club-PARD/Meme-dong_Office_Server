@@ -7,6 +7,7 @@ import com.wepard.meme_dong_office.exception.constants.ExceptionCode;
 import com.wepard.meme_dong_office.repository.StudentsRepository;
 import com.wepard.meme_dong_office.service.awsS3.AWSS3Service;
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,19 +17,11 @@ import java.util.NoSuchElementException;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class StudentsImagesService {
 
     private final AWSS3Service awss3Service;
     private final StudentsRepository studentsRepository;
-
-    @Autowired
-    public StudentsImagesService(
-            final AWSS3Service awss3Service,
-            final StudentsRepository studentsRepository
-    ){
-        this.awss3Service = awss3Service;
-        this.studentsRepository = studentsRepository;
-    }
 
     @Transactional
     public String uploadStudentsImages(

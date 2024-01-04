@@ -8,6 +8,7 @@ import com.wepard.meme_dong_office.exception.CustomException;
 import com.wepard.meme_dong_office.exception.constants.ExceptionCode;
 import com.wepard.meme_dong_office.repository.UsersRepository;
 import com.wepard.meme_dong_office.security.TokenProvider;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,23 +18,12 @@ import java.util.NoSuchElementException;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class TokenService {
 
     private final UsersRepository usersRepository;
     private final TokenProvider tokenProvider;
     private final WebSecurityConfig webSecurityConfig;
-
-    @Autowired
-    public TokenService(
-            final UsersRepository usersRepository,
-            final TokenProvider tokenProvider,
-            final WebSecurityConfig webSecurityConfig
-    ){
-        this.usersRepository = usersRepository;
-        this.tokenProvider = tokenProvider;
-        this.webSecurityConfig = webSecurityConfig;
-    };
-
 
     public TokenResponseDTO signIn(
             final TokenRequestDTO tokenRequestDTO

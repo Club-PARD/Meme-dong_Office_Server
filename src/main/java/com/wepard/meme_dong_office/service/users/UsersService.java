@@ -11,6 +11,7 @@ import com.wepard.meme_dong_office.exception.constants.ExceptionCode;
 import com.wepard.meme_dong_office.repository.UsersRepository;
 import com.wepard.meme_dong_office.security.TokenProvider;
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,22 +22,12 @@ import java.util.stream.Collectors;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class UsersService {
 
     private final UsersRepository usersRepository;
     private final WebSecurityConfig webSecurityConfig;
     private final TokenProvider tokenProvider;
-
-    @Autowired
-    public UsersService(
-            final UsersRepository usersRepository,
-            final WebSecurityConfig webSecurityConfig,
-            final TokenProvider tokenProvider
-    ){
-        this.usersRepository = usersRepository;
-        this.webSecurityConfig = webSecurityConfig;
-        this.tokenProvider = tokenProvider;
-    }
 
     public TokenResponseDTO signUp(final UsersRequestDTO usersRequestDTO){
 
