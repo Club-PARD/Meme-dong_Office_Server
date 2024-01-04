@@ -9,7 +9,6 @@ import lombok.Setter;
 public class TokenResponseDTO {
     private String accessToken;
     private String tokenType;
-    private String refreshToken;
     private Integer exprTime;
     private Long userId;
 
@@ -17,13 +16,11 @@ public class TokenResponseDTO {
     public TokenResponseDTO(
             final String accessToken,
             final String tokenType,
-            final String refreshToken,
             final Integer exprTime,
             final Long userId
     ){
         this.accessToken = accessToken;
         this.tokenType = tokenType;
-        this.refreshToken = refreshToken;
         this.exprTime = exprTime;
         this.userId = userId;
     }

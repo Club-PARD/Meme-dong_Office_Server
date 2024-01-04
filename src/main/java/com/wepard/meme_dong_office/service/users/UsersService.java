@@ -79,19 +79,16 @@ public class UsersService {
             throw new CustomException(ExceptionCode.INTERNAL_SERVER_ERROR);
         }
 
-        //accessToken expire time : 1 hour, 엑세스 토큰 유효 시간 : 1시간
-        final String accessToken = tokenProvider.createToken(savedUsers.getId(), 1);
-        //refreshToken expire time : 2 weeks, 리프레시 토큰 유효 시간 : 2주
-        final String refreshToken = tokenProvider.createToken(savedUsers.getId(), 336);
-        //accessToken expire time (second), 엑세스 토큰 유효 시간 (초)
-        final Integer exprTime = 3600;
+        //accessToken expire time : 1 hour, 엑세스 토큰 유효 시간 : 1주
+        final String accessToken = tokenProvider.createToken(savedUsers.getId(), 168);
+        //accessToken expire time (second), 엑세스 토큰 유효 시간 (시간)
+        final Integer exprTime = 168;
 
         final String tokenType = tokenProvider.getTokenType();
 
         return TokenResponseDTO.builder()
                 .accessToken(accessToken)
                 .tokenType(tokenType)
-                .refreshToken(refreshToken)
                 .exprTime(exprTime)
                 .userId(savedUsers.getId())
                 .build();

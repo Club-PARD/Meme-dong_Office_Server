@@ -1,7 +1,6 @@
 package com.wepard.meme_dong_office.service.token;
 
 import com.wepard.meme_dong_office.config.WebSecurityConfig;
-import com.wepard.meme_dong_office.dto.refreshToken.request.RefreshTokenRequestDTO;
 import com.wepard.meme_dong_office.dto.token.request.TokenRequestDTO;
 import com.wepard.meme_dong_office.dto.token.response.TokenResponseDTO;
 import com.wepard.meme_dong_office.entity.users.Users;
@@ -63,47 +62,19 @@ public class TokenService {
             throw new CustomException(ExceptionCode.LOGIN_FAILED);
         }
 
-        //accessToken expire time : 1 hour, 엑세스 토큰 유효 시간 : 1시간
-        final String accessToken = tokenProvider.createToken(users.getId(), 1);
-        //refreshToken expire time : 2 weeks, 리프레시 토큰 유효 시간 : 2주
-        final String refreshToken = tokenProvider.createToken(users.getId(), 336);
-        //accessToken expire time (second), 엑세스 토큰 유효 시간 (초)
-        final Integer exprTime = 3600;
+        //accessToken expire time : 1 hour, 엑세스 토큰 유효 시간 : 1주
+        final String accessToken = tokenProvider.createToken(users.getId(), 168);
+        //accessToken expire time (second), 엑세스 토큰 유효 시간 (시간)
+        final Integer exprTime = 168;
 
         final String tokenType = tokenProvider.getTokenType();
 
         return TokenResponseDTO.builder()
                 .accessToken(accessToken)
                 .tokenType(tokenType)
-                .refreshToken(refreshToken)
                 .exprTime(exprTime)
                 .userId(users.getId())
                 .build();
 
     }
-
-    public TokenResponseDTO refreshToken(
-            final RefreshTokenRequestDTO refreshTokenRequestDTO
-    ){
-        final String token = refreshTokenRequestDTO.getRefreshToken();
-        final Long userId = Long.parseLong(tokenProvider.validate(token));
-
-        //accessToken expire time : 1 hour, 엑세스 토큰 유효 시간 : 1시간
-        final String accessToken = tokenProvider.createToken(userId, 1);
-        //refreshToken expire time : 2 weeks, 리프레시 토큰 유효 시간 : 2주
-        final String refreshToken = tokenProvider.createToken(userId, 336);
-        //accessToken expire time (second), 엑세스 토큰 유효 시간 (초)
-        final Integer exprTime = 3600;
-
-        final String tokenType = tokenProvider.getTokenType();
-
-        return TokenResponseDTO.builder()
-                .accessToken(accessToken)
-                .tokenType(tokenType)
-                .refreshToken(refreshToken)
-                .exprTime(exprTime)
-                .userId(userId)
-                .build();
-    }
-
 }
