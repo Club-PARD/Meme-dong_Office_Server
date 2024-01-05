@@ -126,7 +126,7 @@ public class StudentsService {
         }
 
         //학급 번호 비어있지 않을 때 업데이트
-        if(!StringUtils.isEmpty(studentsListId.toString())){
+        if(Optional.ofNullable(studentsListId).isPresent()){
 
             final StudentsList studentsList;
             try{
